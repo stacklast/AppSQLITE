@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppSQLITE.Formulario">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="20"
+            Spacing="10">
+            
+            <Label Text="CRUD SQLite"
+                HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="txtusername"
+                   Placeholder="INgrese Username" />
+
+            <Entry x:Name="txtemail"
+                   Placeholder="Ingrese Email" />
+
+            <Entry x:Name="txtpassword"
+                   Placeholder="Ingrese Passworkd"
+                   Keyboard="Default"
+                   IsPassword="True"/>
+
+            <Button Text="Crear" 
+                    x:Name="btncrear"
+                    Clicked="btncrear_Clicked"
+                    TextColor="White"
+                    BackgroundColor="Green"/>
+
+            <Button Text="Listar"
+                    x:Name="btnlistar"
+                    Clicked="btnlistar_Clicked"
+                    TextColor="White"
+                    BackgroundColor="Black" />
+
+            <ListView
+                x:Name="userlist">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding UserName}"/>
+                                <Label Text="{Binding Email}"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding Password}"
+                                        Grid.Column="1"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
