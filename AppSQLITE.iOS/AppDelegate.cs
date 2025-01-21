@@ -23,7 +23,10 @@ namespace AppSQLITE.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            string dbpath = FileAccess.GetLocalFilePath("users.db3");
+
+            LoadApplication(new App(dbpath));
 
             return base.FinishedLaunching(app, options);
         }

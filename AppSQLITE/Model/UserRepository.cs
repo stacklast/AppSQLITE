@@ -10,7 +10,7 @@ namespace AppSQLITE.Model
         #region Attributos
         private SQLiteConnection con;
         private static UserRepository instance;
-        private string estadoMensaje;
+        public string estadoMensaje;
         #endregion
 
         public static UserRepository Instance

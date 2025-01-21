@@ -8,6 +8,7 @@
             Spacing="10">
             
             <Label Text="CRUD SQLite"
+                FontSize="Title"
                 HorizontalOptions="CenterAndExpand" />
 
             <Entry x:Name="txtusername"
@@ -32,23 +33,41 @@
                     Clicked="btnlistar_Clicked"
                     TextColor="White"
                     BackgroundColor="Black" />
+            <Label x:Name="mensaje"
+                TextColor="Red"
+                FontSize="Large" />
 
-            <ListView
-                x:Name="userlist">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Label Text="{Binding UserName}"/>
-                                <Label Text="{Binding Email}"
-                                       Grid.Column="1"/>
-                                <Label Text="{Binding Password}"
-                                        Grid.Column="1"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Label Text="Lista de Usuarios"
+                TextColor="Black"
+                FontSize="Title"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="false"
+                x:Name="lblTitulo" />
+
+            <Frame
+                BackgroundColor="AliceBlue"
+                Padding="5"
+                Margin="5"
+                IsVisible="false"
+                x:Name="frDatos">
+                <ListView
+                    x:Name="userlist">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding UserName}" TextColor="Black"/>
+                                    <Label Text="{Binding Email}"
+                                           Grid.Column="1" TextColor="Black"/>
+                                    <Label Text="{Binding Password}"
+                                            Grid.Column="1" TextColor="Black"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

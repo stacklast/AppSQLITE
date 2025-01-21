@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 
 using Android.App;
 using Android.Content.PM;
@@ -16,7 +17,10 @@ namespace AppSQLITE.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            string dbpath = FileAccess.GetLocalFilePath("users.db3");
+            
+            LoadApplication(new App(dbpath));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
