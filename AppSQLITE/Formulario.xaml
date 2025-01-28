@@ -2,72 +2,102 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppSQLITE.Formulario">
-    <ContentPage.Content>
-        <StackLayout
-            Padding="20"
-            Spacing="10">
-            
-            <Label Text="CRUD SQLite"
-                FontSize="Title"
-                HorizontalOptions="CenterAndExpand" />
 
-            <Entry x:Name="txtusername"
-                   Placeholder="INgrese Username" />
+    <AbsoluteLayout>
+        <!-- Main Content in a ScrollView -->
+        <ScrollView AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Padding="20" Spacing="10">
+                <Label Text="CRUD SQLite" 
+                       FontSize="Title" 
+                       HorizontalOptions="CenterAndExpand" />
 
-            <Entry x:Name="txtemail"
-                   Placeholder="Ingrese Email" />
+                <Entry x:Name="txtusername" Placeholder="Ingrese Username" />
+                <Entry x:Name="txtemail" Placeholder="Ingrese Email" />
+                <Entry x:Name="txtpassword" Placeholder="Ingrese Password" 
+                       Keyboard="Default" IsPassword="True"/>
 
-            <Entry x:Name="txtpassword"
-                   Placeholder="Ingrese Passworkd"
-                   Keyboard="Default"
-                   IsPassword="True"/>
+                <Button Text="Crear" x:Name="btncrear" 
+                        Clicked="btncrear_Clicked" 
+                        TextColor="White" 
+                        BackgroundColor="Green"/>
+                <Button Text="Listar" x:Name="btnlistar" 
+                        Clicked="btnlistar_Clicked" 
+                        TextColor="White" 
+                        BackgroundColor="Black" />
+                <Label x:Name="mensaje" 
+                       TextColor="Red" 
+                       FontSize="Large" />
 
-            <Button Text="Crear" 
-                    x:Name="btncrear"
-                    Clicked="btncrear_Clicked"
-                    TextColor="White"
-                    BackgroundColor="Green"/>
+                <Label Text="Lista de Usuarios" 
+                       TextColor="Black" 
+                       FontSize="Title" 
+                       HorizontalOptions="CenterAndExpand" 
+                       IsVisible="false" 
+                       x:Name="lblTitulo" />
 
-            <Button Text="Listar"
-                    x:Name="btnlistar"
-                    Clicked="btnlistar_Clicked"
-                    TextColor="White"
-                    BackgroundColor="Black" />
-            <Label x:Name="mensaje"
-                TextColor="Red"
-                FontSize="Large" />
+                <Frame BackgroundColor="AliceBlue" 
+                       Padding="5" 
+                       Margin="5" 
+                       IsVisible="false" 
+                       x:Name="frDatos">
+                    <ListView x:Name="userlist" ItemSelected="userlist_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <!-- Define columns with different widths -->
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding UserName}"
+                                               Grid.Column="0" 
+                                               TextColor="Black" 
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding Email}" 
+                                               Grid.Column="1" 
+                                               TextColor="Black" 
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding Password}" 
+                                               Grid.Column="2" 
+                                               TextColor="Black" 
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
 
-            <Label Text="Lista de Usuarios"
-                TextColor="Black"
-                FontSize="Title"
-                HorizontalOptions="CenterAndExpand"
-                IsVisible="false"
-                x:Name="lblTitulo" />
+        <!-- Modal Overlay -->
+        <Frame x:Name="modalOverlay" 
+               BackgroundColor="Transparent"
+               BorderColor="Gray"
+               Opacity="0.9" IsVisible="false"
+               AbsoluteLayout.LayoutFlags="All" 
+               AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+               HasShadow="True" Padding="0">
+            <StackLayout x:Name="detailForm" 
+                         Padding="20" 
+                         BackgroundColor="White" 
+                         VerticalOptions="Center" 
+                         HorizontalOptions="Center" 
+                         HeightRequest="300" 
+                         WidthRequest="300">
+                <Label Text="Detalles del Usuario" 
+                       FontSize="Title" 
+                       HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="editUserName" Placeholder="Username" />
+                <Entry x:Name="editEmail" Placeholder="Email" />
+                <Entry x:Name="editPassword" Placeholder="Password" IsPassword="True" />
+                <Button Text="Modificar" Clicked="btnmodificar_Clicked" TextColor="White" BackgroundColor="Blue" />
+                <Button Text="Eliminar" Clicked="btneliminar_Clicked" TextColor="White" BackgroundColor="Red" />
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
 
-            <Frame
-                BackgroundColor="AliceBlue"
-                Padding="5"
-                Margin="5"
-                IsVisible="false"
-                x:Name="frDatos">
-                <ListView
-                    x:Name="userlist">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Label Text="{Binding UserName}" TextColor="Black"/>
-                                    <Label Text="{Binding Email}"
-                                           Grid.Column="1" TextColor="Black"/>
-                                    <Label Text="{Binding Password}"
-                                            Grid.Column="1" TextColor="Black"/>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
-            
-        </StackLayout>
-    </ContentPage.Content>
 </ContentPage>

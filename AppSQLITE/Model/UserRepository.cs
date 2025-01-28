@@ -8,8 +8,8 @@ namespace AppSQLITE.Model
     public class UserRepository
     {
         #region Attributos
-        private SQLiteConnection con;
-        private static UserRepository instance;
+        private readonly SQLiteConnection _con;
+        private static UserRepository _instance;
         public string estadoMensaje;
         #endregion
 
@@ -17,9 +17,9 @@ namespace AppSQLITE.Model
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                     throw new Exception("Debe llamar al metodo inicializador");
-                return instance;
+                return _instance;
             }
         }
 
@@ -27,16 +27,16 @@ namespace AppSQLITE.Model
         {
             if (filename == null) throw new ArgumentNullException("filename");
 
-            if (instance != null)
-                instance.con.Close();
+            if (_instance != null)
+                _instance._con.Close();
 
-            instance = new UserRepository(filename);
+            _instance = new UserRepository(filename);
         }
 
         private UserRepository(string dbpath)
         {
-            con = new SQLiteConnection(dbpath);
-            con.CreateTable<User>();
+            _con = new SQLiteConnection(dbpath);
+            _con.CreateTable<User>();
         }
 
         public int AddUser(string username, string email, string password)
@@ -44,7 +44,7 @@ namespace AppSQLITE.Model
             int result = 0;
             try
             {
-                result = con.Insert(new User()
+                result = _con.Insert(new User()
                 {
                     UserName = username,
                     Email = email,
@@ -61,17 +61,48 @@ namespace AppSQLITE.Model
             return result;
         }
 
-        public IEnumerable<User> getUsers()
+        public IEnumerable<User> GetUsers()
         {
             try
             {
-                return con.Table<User>();
+                return _con.Table<User>();
             }
             catch (Exception ex)
             {
                 estadoMensaje = ex.Message;
             }
             return Enumerable.Empty<User>();
+        }
+
+        public int UpdateUser(User user)
+        {
+            int result = 0;
+            try
+            {
+                result = _con.Update(user);
+                estadoMensaje = string.Format("Cantidad de filas afectadas {0}", result);
+            }
+            catch (Exception ex)
+            {
+                estadoMensaje = ex.Message;
+            }
+
+            return result;
+        }
+        public int DeleteUser(int id)
+        {
+            int result = 0;
+            try
+            {
+                result = _con.Delete<User>(id);
+                estadoMensaje = string.Format("Cantidad de filas afectadas {0}", result);
+            }
+            catch (Exception ex)
+            {
+                estadoMensaje = ex.Message;
+            }
+
+            return result;
         }
     }
 }
