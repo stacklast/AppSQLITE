@@ -1,7 +1,6 @@
-﻿using System;
+﻿using AppSQLITE.Model;
+using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using AppSQLITE.Model;
 
 namespace AppSQLITE
 {
@@ -13,7 +12,7 @@ namespace AppSQLITE
 
             UserRepository.Inicializador(filename);
 
-            MainPage = new MainPage();
+            MainPage = new Formulario();
         }
 
         protected override void OnStart()

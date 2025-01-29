@@ -1,32 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppSQLITE.Formulario">
     <ContentPage.Content>
         <StackLayout
             Padding="20"
             Spacing="10">
-            
+
             <Label Text="CRUD SQLite"
-                FontSize="Title"
-                HorizontalOptions="CenterAndExpand" />
+                   FontSize="Title"
+                   HorizontalOptions="CenterAndExpand" />
 
             <Entry x:Name="txtusername"
-                   Placeholder="INgrese Username" />
+                   Placeholder="Ingrese Username" />
 
             <Entry x:Name="txtemail"
                    Placeholder="Ingrese Email" />
 
             <Entry x:Name="txtpassword"
-                   Placeholder="Ingrese Passworkd"
+                   Placeholder="Ingrese Password"
                    Keyboard="Default"
                    IsPassword="True"/>
 
-            <Button Text="Crear" 
+            <Button Text="Crear"
                     x:Name="btncrear"
                     Clicked="btncrear_Clicked"
                     TextColor="White"
-                    BackgroundColor="Green"/>
+                    BackgroundColor="Green" />
 
             <Button Text="Listar"
                     x:Name="btnlistar"
@@ -34,24 +33,23 @@
                     TextColor="White"
                     BackgroundColor="Black" />
             <Label x:Name="mensaje"
-                TextColor="Red"
-                FontSize="Large" />
+                   TextColor="Red"
+                   FontSize="Large" />
 
             <Label Text="Lista de Usuarios"
-                TextColor="Black"
-                FontSize="Title"
-                HorizontalOptions="CenterAndExpand"
-                IsVisible="false"
-                x:Name="lblTitulo" />
+                   TextColor="Black"
+                   FontSize="Title"
+                   HorizontalOptions="CenterAndExpand"
+                   IsVisible="false"
+                   x:Name="lblTitulo" />
 
-            <Frame
-                BackgroundColor="AliceBlue"
-                Padding="5"
-                Margin="5"
-                IsVisible="false"
-                x:Name="frDatos">
-                <ListView
-                    x:Name="userlist">
+            <Frame BackgroundColor="AliceBlue"
+                   Padding="5"
+                   Margin="5"
+                   IsVisible="false"
+                   x:Name="frDatos">
+                <ListView x:Name="userlist"
+                          ItemTapped="OnItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -60,14 +58,37 @@
                                     <Label Text="{Binding Email}"
                                            Grid.Column="1" TextColor="Black"/>
                                     <Label Text="{Binding Password}"
-                                            Grid.Column="1" TextColor="Black"/>
+                                           Grid.Column="1" TextColor="Black"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Frame>
-            
+
+            <StackLayout x:Name="updateForm"
+                         Padding="20"
+                         IsVisible="false">
+                <Label Text="Actualizar/Eliminar Usuario"
+                       FontSize="Title"
+                       HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="txtUpdateUsername"
+                       Placeholder="Update Username" />
+                <Entry x:Name="txtUpdateEmail"
+                       Placeholder="Update Email" />
+                <Entry x:Name="txtUpdatePassword"
+                       Placeholder="Update Password"
+                       IsPassword="True" />
+                <Button Text="Actualizar"
+                        Clicked="btnupdate_Clicked"
+                        TextColor="White"
+                        BackgroundColor="Blue" />
+                <Button Text="Eliminar"
+                        Clicked="btndelete_Clicked"
+                        TextColor="White"
+                        BackgroundColor="Red" />
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

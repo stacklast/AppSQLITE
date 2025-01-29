@@ -73,6 +73,38 @@ namespace AppSQLITE.Model
             }
             return Enumerable.Empty<User>();
         }
+
+        public int UpdateUser(User user)
+        {
+            int result = 0;
+            try
+            {
+                result = con.Update(user);
+                estadoMensaje = string.Format("Cantidad de filas afectadas {0}", result);
+            }
+            catch (Exception ex)
+            {
+                estadoMensaje = ex.Message;
+            }
+
+            return result;
+        }
+
+        public int DeleteUser(int id)
+        {
+            int result = 0;
+            try
+            {
+                result = con.Delete<User>(id);
+                estadoMensaje = string.Format("Cantidad de filas afectadas {0}", result);
+            }
+            catch (Exception ex)
+            {
+                estadoMensaje = ex.Message;
+            }
+
+            return result;
+        }
     }
 }
 
